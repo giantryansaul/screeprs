@@ -1,9 +1,10 @@
 module.exports = {
-    name: 'harvester'
+    
+    name: 'harvester',
 
     parts: [
         [WORK, CARRY, MOVE]
-    ]
+    ],
 
     /** @param {Creep} creep **/
     run: function(creep) {

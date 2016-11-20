@@ -1,9 +1,14 @@
 var base = require('base');
 var runCreeps = require('run.creeps');
-var rooms = require('rooms');
+var roomObj = require('rooms');
 
-base.workers();
-for (room in rooms) {
-    base.build_structures(room);
+module.exports.loop = function () {
+    base.workers();
+
+    room_names = roomObj.get();
+    for (var room_name in room_names) {
+        console.log('available rooms:' + room_name);
+        base.build_structures(room_name);
+    }
+    runCreeps.run();
 }
-runCreeps.run();

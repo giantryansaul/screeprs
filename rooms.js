@@ -1,10 +1,12 @@
 module.exports = function() {
 
-    var my_spawns = Object.keys(Game.spawns);
-    var my_rooms = [];
-    for (spawn in my_spawns) {
-        my_rooms.push(spawn.room.name);
+    get: funtion() {
+        var my_spawns = Object.keys(Game.spawns);
+        var my_rooms = [];
+        for (spawn in my_spawns) {
+            my_rooms.push(spawn.room.name);
+        }
+        return [...new Set(my_rooms)];
     }
-    return [...new Set(my_rooms)];
 
 }

@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = function() {
 
     var my_spawns = Object.keys(Game.spawns);
     var my_rooms = [];
@@ -6,5 +6,5 @@ module.exports = {
         my_rooms.push(spawn.room.name);
     }
     return [...new Set(my_rooms)];
-    
+
 }

@@ -5,7 +5,7 @@ module.exports = {
             mySpawns.push(spawn.name);
         }
         return mySpawns;
-    }
+    },
 
     getRooms: function() {
         var myRooms = [];
@@ -13,7 +13,7 @@ module.exports = {
             myRooms.push(Game.spawns[spawn].room.name);
         }
         return myRooms;
-    }
+    },
 
     withdrawEnergyFromBase: function(creep) {
          var targets = creep.room.find(FIND_STRUCTURES, {
@@ -27,7 +27,7 @@ module.exports = {
                     creep.moveTo(targets[0]);
                 }
             }
-     }
+     },
 
      buildCreep: function(role, roomName) {
          // Should later come back and make a recursive method to try building

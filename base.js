@@ -21,7 +21,7 @@ module.exports = {
         if (upgraders.length < 2) {
             common.buildCreep(roleUpgrader, roomName);
         }
-    }
+    },
 
     workerBehavior: function(roomName) {
 

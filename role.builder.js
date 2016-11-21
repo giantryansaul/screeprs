@@ -1,4 +1,4 @@
-var creep_common = require('creep_common');
+var common = require('common');
 
 module.exports = {
 
@@ -30,7 +30,7 @@ module.exports = {
             }
         }
         else {
-            creep_common.withdraw(creep);
+            common.withdrawEnergyFromBase(creep);
         }
     }
 };

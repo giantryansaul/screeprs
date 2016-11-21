@@ -1,7 +1,7 @@
 module.exports = {
     getSpawns: function() {
         var mySpawns = [];
-        for spawn in Game.spawns) {
+        for (spawn in Game.spawns) {
             mySpawns.push(spawn.name);
         }
         return mySpawns;
@@ -22,7 +22,7 @@ module.exports = {
                             structure.structureType == STRUCTURE_SPAWN) && structure.energy;
                 }
             });
-            if(targets.length > 0) {
+            if (targets.length > 0) {
                 if(creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }
@@ -35,7 +35,8 @@ module.exports = {
          spawns = Game.rooms[roomName].find(FIND_MY_STRUCTURES,
              { filter: { structureType: STRUCTURE_SPAWN } }
          );
-         Game.spawns[spawns[0]].createCreep(
+         // just specifying Spawn1 until I figure this part out.
+         Game.spawns['Spawn1'].createCreep(
              role.parts[0], undefined, {role: role.name}
          );
      }

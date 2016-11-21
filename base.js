@@ -11,21 +11,19 @@ module.exports = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == roleUpgrader.name);
 
         if (harvesters.length < 2) {
-            common.buildCreep(roleHarvester);
+            common.buildCreep(roleHarvester, roomName);
         }
 
         if (builders.length < 1) {
-            common.buildCreep(roleBuilder);
+            common.buildCreep(roleBuilder, roomName);
         }
 
         if (upgraders.length < 2) {
-            common.buildCreep(roleUpgrader);
+            common.buildCreep(roleUpgrader, roomName);
         }
     }
 
-    workerBehavior: function() {
-
-
+    workerBehavior: function(roomName) {
 
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];

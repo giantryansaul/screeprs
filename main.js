@@ -6,9 +6,8 @@ module.exports.loop = function () {
     base.workers();
 
     room_names = roomObj.get();
-    for (var room_name in room_names) {
-        console.log('available rooms:' + room_name);
-        base.build_structures(room_name);
+    for (var i = 0; i < room_names.length; i++) {
+        base.build_structures(room_names[i]);
     }
     runCreeps.run();
 }

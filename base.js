@@ -30,16 +30,16 @@ module.exports = {
             [0, 2],
             [2, 0],
             [0, -2],
-            [-2, 0]
+            [-2, 0],
+            [2, 2]
         ]
 
-        for (position in positions) {
-
+        for (var i=0; i < positions.length; i++) {
             Game.rooms[room_name].createConstructionSite(
-                Game.spawns.Spawn1.pos.x + position[0],
-                Game.spawns.Spawn1.pos.y + position[1],
+                Game.spawns.Spawn1.pos.x + positions[i][0],
+                Game.spawns.Spawn1.pos.y + positions[i][1],
                 STRUCTURE_EXTENSION
-            )
+            );
         }
     }
 }

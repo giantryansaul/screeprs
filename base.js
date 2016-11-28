@@ -10,12 +10,18 @@ module.exports = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == roleBuilder.name);
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == roleUpgrader.name);
 
-        if (harvesters.length < 2) {
-            common.buildCreep(roleHarvester, roomName);
-        } else if (upgraders.length < 2) {
-            common.buildCreep(roleUpgrader, roomName);
-        } else if (builders.length < 1) {
-            common.buildCreep(roleBuilder, roomName);
+        if (Game.rooms[roomName].controller.level == 1) {
+            if (harvesters.length < 2) {
+                common.buildCreep(roleHarvester, roomName);
+            } else if (upgraders.length < 2) {
+                common.buildCreep(roleUpgrader, roomName);
+        } else if {
+            for (var harvester in harvesters) {
+                harvester.suicide();
+            }
+            if (builders.length < 3)
+                common.buildCreep(roleBuilder, roomName);
+            }
         }
         //TODO: Create a build chain for order of operations
         //i.e. first build 2 harvesters, then upgrade, then build extensions

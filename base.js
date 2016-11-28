@@ -12,15 +12,13 @@ module.exports = {
 
         if (harvesters.length < 2) {
             common.buildCreep(roleHarvester, roomName);
-        }
-
-        if (builders.length < 1) {
+        } else if (upgraders.length < 2) {
+            common.buildCreep(roleUpgrader, roomName);
+        } else if (builders.length < 1) {
             common.buildCreep(roleBuilder, roomName);
         }
-
-        if (upgraders.length < 2) {
-            common.buildCreep(roleUpgrader, roomName);
-        }
+        //TODO: Create a build chain for order of operations
+        //i.e. first build 2 harvesters, then upgrade, then build extensions
     },
 
     workerBehavior: function(roomName) {

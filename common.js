@@ -12,7 +12,6 @@ module.exports = {
         var spawns = this.getSpawns();
         var myRooms = [];
         for (i = 0; i < spawns.length; i++) {
-            //console.log(spawns[i].name);
             myRooms.push(Game.spawns[spawns[i]].room.name);
         }
         return myRooms;

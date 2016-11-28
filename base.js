@@ -15,11 +15,13 @@ module.exports = {
                 common.buildCreep(roleHarvester, roomName);
             } else if (upgraders.length < 2) {
                 common.buildCreep(roleUpgrader, roomName);
+            }
         } else if {
             for (var harvester in harvesters) {
                 harvester.suicide();
             }
-            if (builders.length < 3)
+
+            if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);
             }
         }

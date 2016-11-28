@@ -8,9 +8,9 @@ module.exports = {
     buildLevel: function(roomName) {
         var level = common.getRoomLevel(roomName);
 
-        buildWorkers(roomName, level);
-        workerBehavior(roomName, level);
-        buildStructures(roomName, level);
+        this.buildWorkers(roomName, level);
+        this.workerBehavior(roomName, level);
+        this.buildStructures(roomName, level);
     },
 
     buildWorkers: function(roomName, level) {

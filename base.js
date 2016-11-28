@@ -5,47 +5,62 @@ var roleUpgrader = require('role.upgrader');
 
 module.exports = {
 
-    buildWorkers: function(roomName) {
+    buildLevel: function(roomName) {
+        var level = common.getRoomLevel(roomName);
+
+        buildWorkers(roomName, level);
+        workerBehavior(roomName, level);
+        buildStructures(roomName, level);
+    }
+
+    buildWorkers: function(roomName, level) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == roleHarvester.name);
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == roleBuilder.name);
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == roleUpgrader.name);
 
-        if (Game.rooms[roomName].controller.level == 1) {
-            if (harvesters.length < 2) {
+        if (level == 1) {
+            if (harvesters.length < 3) {
                 common.buildCreep(roleHarvester, roomName);
             } else if (upgraders.length < 2) {
                 common.buildCreep(roleUpgrader, roomName);
             }
-        } else if (Game.rooms[roomName].controller.level == 2){
-            for (var harvester in harvesters) {
-                harvester.suicide();
+        } else if (level == 2){
+            for (var h; h < upgraders.length; h++) {
+                console.log(upgraders[h]); // FIXME
+                Game.creeps[upgraders[h].name].suicide();
             }
-
-            if (builders.length < 3) {
+            if (harvesters.length < 3) {
+                common.buildCreep(roleHarvester, roomName);
+            } else if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);
             }
         }
-        //TODO: Create a build chain for order of operations
-        //i.e. first build 2 harvesters, then upgrade, then build extensions
     },
 
-    workerBehavior: function(roomName) {
+    workerBehavior: function(roomName, level) {
 
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
-           if(creep.memory.role == roleHarvester.name) {
-               roleHarvester.run(creep);
-           }
-           if(creep.memory.role == roleBuilder.name) {
-               roleBuilder.run(creep);
-           }
-           if(creep.memory.role == roleUpgrader.name) {
-               roleUpgrader.run(creep);
+
+           if (level == 1) {
+               if(creep.memory.role == roleHarvester.name) {
+                   roleHarvester.run(creep);
+               }
+               if(creep.memory.role == roleUpgrader.name) {
+                   roleUpgrader.run(creep);
+               }
+           } else if (level == 2) {
+               if(creep.memory.role == roleBuilder.name) {
+                   roleBuilder.run(creep);
+               }
+               if(creep.memory.role == roleHarvester.name) {
+                   roleHarvester.run(creep);
+               }
            }
        }
     },
 
-    buildStructures: function(roomName) {
+    buildStructures: function(roomName, level) {
 
         var positions = [
             [0, 2],

@@ -17,6 +17,10 @@ module.exports = {
         return myRooms;
     },
 
+    getRoomLevel: function(roomName) {
+        return Game.rooms[roomName].controller.level;
+    },
+
     withdrawEnergyFromBase: function(creep) {
          var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {

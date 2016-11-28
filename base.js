@@ -11,7 +11,7 @@ module.exports = {
         buildWorkers(roomName, level);
         workerBehavior(roomName, level);
         buildStructures(roomName, level);
-    }
+    },
 
     buildWorkers: function(roomName, level) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == roleHarvester.name);

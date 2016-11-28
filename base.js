@@ -16,7 +16,7 @@ module.exports = {
             } else if (upgraders.length < 2) {
                 common.buildCreep(roleUpgrader, roomName);
             }
-        } else if {
+        } else if (Game.rooms[roomName].controller.level == 2){
             for (var harvester in harvesters) {
                 harvester.suicide();
             }

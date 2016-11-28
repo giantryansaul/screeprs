@@ -8,9 +8,10 @@ module.exports = {
     },
 
     getRooms: function() {
+        var spawns = Game.spawns;
         var myRooms = [];
-        for (var i = 0; i < Game.spawns; i++) {
-            myRooms.push(Game.spawns[i].room.name);
+        for (var i = 0; i < spawns.length; i++) {
+            myRooms.push(Game.spawns[spawns[i].name].room.name);
         }
         return myRooms;
     },

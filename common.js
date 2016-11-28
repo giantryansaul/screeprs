@@ -1,17 +1,19 @@
 module.exports = {
     getSpawns: function() {
+        var spawns = Game.spawns;
         var mySpawns = [];
-        for (spawn in Game.spawns) {
-            mySpawns.push(spawn.name);
+        for (var spawn in spawns) {
+            mySpawns.push(spawn);
         }
         return mySpawns;
     },
 
     getRooms: function() {
-        var spawns = Game.spawns;
+        var spawns = this.getSpawns();
         var myRooms = [];
-        for (var i = 0; i < spawns.length; i++) {
-            myRooms.push(Game.spawns[spawns[i].name].room.name);
+        for (i = 0; i < spawns.length; i++) {
+            //console.log(spawns[i].name);
+            myRooms.push(Game.spawns[spawns[i]].room.name);
         }
         return myRooms;
     },
@@ -33,7 +35,7 @@ module.exports = {
      buildCreep: function(role, roomName) {
          // Should later come back and make a recursive method to try building
          // at each spawn until an available one is found.
-         spawns = Game.rooms[roomName].find(FIND_MY_STRUCTURES,
+         var spawns = Game.rooms[roomName].find(FIND_MY_STRUCTURES,
              { filter: { structureType: STRUCTURE_SPAWN } }
          );
          // just specifying Spawn1 until I figure this part out.

@@ -41,7 +41,7 @@ module.exports = {
 
     buildStructures: function(roomName) {
 
-        positions = [
+        var positions = [
             [0, 2],
             [2, 0],
             [0, -2],

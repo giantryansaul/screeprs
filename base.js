@@ -72,8 +72,8 @@ module.exports = {
         ]
 
         for (var i=0; i < positions.length; i++) {
+            var spawn = Game.rooms[roomName].find(FIND_MY_SPAWNS)[0];
             Game.rooms[roomName].createConstructionSite(
-                var spawn = Game.rooms[roomName].find(FIND_MY_SPAWNS)[0];
                 spawn.pos.x + positions[i][0],
                 spawn.pos.y + positions[i][1],
                 STRUCTURE_EXTENSION

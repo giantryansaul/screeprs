@@ -27,7 +27,7 @@ module.exports = {
             }
         } else if (level == 2) {
 
-            if (harvesters.length < 5) {
+            if (harvesters.length < 7) {
                 common.buildCreep(roleHarvester, roomName);
             } else if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);
@@ -46,7 +46,7 @@ module.exports = {
 
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
-           if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep);}
+           if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep, roomName);}
            if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep, roomName);}
            if(creep.memory.role == roleBuilder.name) {roleBuilder.run(creep, roomName);}
         }

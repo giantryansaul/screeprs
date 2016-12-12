@@ -14,7 +14,7 @@ module.exports = {
     run: function(creep, roomName, energyLevel) {
 
         if (Game.rooms[roomName].energyAvailable > 250) {
-            if(creep.memory.upgrading && creep.carry.energy == 0) {
+            if(creep.memory.upgrading && creep.carry.energy === 0) {
                 creep.memory.upgrading = false;
                 creep.say('fetching resources');
             }

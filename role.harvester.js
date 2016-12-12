@@ -8,12 +8,6 @@ module.exports = {
         [WORK, WORK, CARRY, CARRY, MOVE, MOVE]
     ],
 
-    parts: function(roomName) {
-        var capacity = Game.rooms[roomName].energyCapacityAvailable;
-        if (capacity < 500) { return [WORK, CARRY, MOVE]; }
-        else if (capacity >= 500 && capacity < 600) { return [WORK, WORK, CARRY, CARRY, MOVE, MOVE]; }
-    }
-
     /** @param {Creep} creep **/
     run: function(creep, roomName, energyLevel) {
         if(creep.carry.energy < creep.carryCapacity) {

@@ -7,4 +7,4 @@ module.exports.loop = function () {
     for (var i = 0; i < rooms.length; i++) {
         base.buildLevel(rooms[i]);
     }
-}
+};

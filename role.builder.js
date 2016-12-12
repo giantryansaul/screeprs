@@ -10,17 +10,10 @@ module.exports = {
         [WORK, WORK, CARRY, CARRY, MOVE, MOVE] // 400
     ],
 
-    parts: function(roomName) {
-        var capacity = Game.rooms[roomName].energyCapacityAvailable;
-        if (capacity < 350) { return [WORK, WORK, CARRY]; }
-        else if (capacity >= 400 && capacity < 500) { return [WORK, WORK, WORK, CARRY]; }
-        else if (capacity >= 550 && capacity < 600) { return [WORK, WORK, CARRY, CARRY, MOVE, MOVE]; }
-    }
-
     /** @param {Creep} creep **/
     run: function(creep, roomName, energyLevel) {
 
-        if(creep.memory.building && creep.carry.energy == 0) {
+        if(creep.memory.building && creep.carry.energy === 0) {
             creep.memory.building = false;
             creep.say('fetching resources');
         }

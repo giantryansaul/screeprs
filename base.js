@@ -7,14 +7,27 @@ module.exports = {
 
     buildLevel: function(roomName) {
         var level = common.getRoomLevel(roomName);
+        var energyLevel = this.energyLevel(roomName);
 
-        this.buildWorkers(roomName, level);
-        this.workerBehavior(roomName, level);
-        this.buildStructures(roomName, level);
-        // TODO: Need a total energy store factor, can't build new workers right now.
+        this.buildWorkers(roomName, level, energyLevel);
+        this.workerBehavior(roomName, level, energyLevel);
+        this.buildStructures(roomName, level, energyLevel);
     },
 
-    buildWorkers: function(roomName, level) {
+    energyLevel: function(roomName) {
+        var capacity = Game.rooms[roomName].energyCapacityAvailable;
+        if (capacity < 350) { return 0; } //max: 200
+        else if (capacity >= 350 && capacity < 450) { return 1; } // max: 300
+        else if (capacity >= 450 && capacity < 600) { return 2; } // max: 400
+    },
+
+    energyAvailablePerLevel = [
+        200,
+        300,
+        400
+    ],
+
+    buildWorkers: function(roomName, level, energyLevel) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == roleHarvester.name);
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == roleBuilder.name);
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == roleUpgrader.name);
@@ -42,17 +55,18 @@ module.exports = {
         }
     },
 
-    workerBehavior: function(roomName, level) {
+    workerBehavior: function(roomName, level, energyLevel) {
 
+        var threshold = energyAvailablePerLevel[energyLevel];
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
-           if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep, roomName);}
-           if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep, roomName);}
-           if(creep.memory.role == roleBuilder.name) {roleBuilder.run(creep, roomName);}
+           if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep, roomName, energyLevel);}
+           if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep, roomName, energyLevel);}
+           if(creep.memory.role == roleBuilder.name) {roleBuilder.run(creep, roomName, energyLevel);}
         }
     },
 
-    buildStructures: function(roomName, level) {
+    buildStructures: function(roomName, level, energyLevel) {
 
         var positions = [
             [0, 2],

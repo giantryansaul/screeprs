@@ -5,17 +5,24 @@ module.exports = {
     name: 'builder',
 
     parts: [
-        [WORK, CARRY, MOVE]
+        [WORK, CARRY, MOVE], // 200
+        [WORK, WORK, WORK, CARRY], // 300
+        [WORK, WORK, CARRY, CARRY, MOVE, MOVE] // 400
     ],
 
+    parts: function(roomName) {
+        var capacity = Game.rooms[roomName].energyCapacityAvailable;
+        if (capacity < 350) { return [WORK, WORK, CARRY]; }
+        else if (capacity >= 400 && capacity < 500) { return [WORK, WORK, WORK, CARRY]; }
+        else if (capacity >= 550 && capacity < 600) { return [WORK, WORK, CARRY, CARRY, MOVE, MOVE]; }
+    }
 
     /** @param {Creep} creep **/
-    run: function(creep, roomName) {
-        if (Game.rooms[roomName].energyAvailable > 300) {
-            if(creep.memory.building && creep.carry.energy == 0) {
-                creep.memory.building = false;
-                creep.say('fetching resources');
-            }
+    run: function(creep, roomName, energyLevel) {
+
+        if(creep.memory.building && creep.carry.energy == 0) {
+            creep.memory.building = false;
+            creep.say('fetching resources');
         }
         if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
             creep.memory.building = true;
@@ -30,7 +37,7 @@ module.exports = {
                 }
             }
         }
-        else {
+        else if (Game.rooms[roomName].energyAvailable > common.energyAvailablePerLevel[energyLevel]) {
             common.withdrawEnergyFromBase(creep);
         }
     }

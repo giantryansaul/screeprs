@@ -5,11 +5,19 @@ module.exports = {
     name: 'upgrader',
 
     parts: [
-        [WORK, CARRY, MOVE]
+        [WORK, CARRY, MOVE],
+        [WORK, CARRY, MOVE],
+        [WORK, WORK, CARRY, CARRY, MOVE, MOVE]
     ],
 
+    parts: function(roomName) {
+        var capacity = Game.rooms[roomName].energyCapacityAvailable;
+        if (capacity < 500) { return [WORK, CARRY, MOVE]; }
+        else if (capacity >= 500 && capacity < 600) { return [WORK, WORK, CARRY, CARRY, MOVE, MOVE]; }
+    }
+
     /** @param {Creep} creep **/
-    run: function(creep, roomName) {
+    run: function(creep, roomName, energyLevel) {
 
         if (Game.rooms[roomName].energyAvailable > 250) {
             if(creep.memory.upgrading && creep.carry.energy == 0) {
@@ -27,7 +35,7 @@ module.exports = {
                 creep.moveTo(creep.room.controller);
             }
         }
-        else {
+        else if (Game.rooms[roomName].energyAvailable > common.energyAvailablePerLevel[energyLevel]) {
             common.withdrawEnergyFromBase(creep);
         }
     }

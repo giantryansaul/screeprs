@@ -9,11 +9,13 @@ module.exports = {
     ],
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, roomName) {
 
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
-            creep.memory.upgrading = false;
-            creep.say('fetching resources');
+        if (Game.rooms[roomName].energyAvailable > 250) {
+            if(creep.memory.upgrading && creep.carry.energy == 0) {
+                creep.memory.upgrading = false;
+                creep.say('fetching resources');
+            }
         }
         if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
             creep.memory.upgrading = true;

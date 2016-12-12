@@ -31,15 +31,12 @@ module.exports = {
                 common.buildCreep(roleHarvester, roomName);
             } else if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);
+            } else if (upgraders.length < 1) {
+                common.buildCreep(roleUpgrader, roomName);
             }
             if (Game.rooms[roomName].energyCapacityAvailable >= 550) {
                 if (upgraders.length < 4) {
                     common.buildCreep(roleUpgrader, roomName);
-                }
-            } else {
-                for (var h; h < upgraders.length; h++) {
-                    console.log(upgraders[h]); // FIXME
-                    Game.creeps[upgraders[h].name].suicide();
                 }
             }
         }
@@ -50,7 +47,7 @@ module.exports = {
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
            if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep);}
-           if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep);}
+           if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep, roomName);}
            if(creep.memory.role == roleBuilder.name) {roleBuilder.run(creep, roomName);}
         }
     },

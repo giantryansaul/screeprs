@@ -27,7 +27,7 @@ module.exports = {
             }
         } else if (level == 2) {
 
-            if (harvesters.length < 3) {
+            if (harvesters.length < 5) {
                 common.buildCreep(roleHarvester, roomName);
             } else if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);

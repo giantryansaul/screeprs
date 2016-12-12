@@ -16,9 +16,13 @@ module.exports = {
 
     energyLevel: function(roomName) {
         var capacity = Game.rooms[roomName].energyCapacityAvailable;
-        if (capacity < 350) { return 0; } //max: 200
-        else if (capacity >= 350 && capacity < 450) { return 1; } // max: 300
-        else if (capacity >= 450 && capacity < 600) { return 2; } // max: 400
+        if (capacity < 350) {
+            return 0; //max: 200
+        } else if (capacity >= 350 && capacity < 450) {
+            return 1; // max: 300
+        } else if (capacity >= 450 && capacity < 600) {
+            return 2; // max: 400
+        }
     },
 
     buildWorkers: function(roomName, level, energyLevel) {

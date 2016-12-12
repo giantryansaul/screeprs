@@ -21,12 +21,6 @@ module.exports = {
         else if (capacity >= 450 && capacity < 600) { return 2; } // max: 400
     },
 
-    energyAvailablePerLevel = [
-        200,
-        300,
-        400
-    ],
-
     buildWorkers: function(roomName, level, energyLevel) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == roleHarvester.name);
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == roleBuilder.name);
@@ -57,7 +51,6 @@ module.exports = {
 
     workerBehavior: function(roomName, level, energyLevel) {
 
-        var threshold = energyAvailablePerLevel[energyLevel];
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
            if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep, roomName, energyLevel);}

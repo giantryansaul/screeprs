@@ -1,5 +1,5 @@
 module.exports = {
-    energyAvailablePerLevel = [
+    energyAvailablePerLevel: [
         200,
         300,
         400

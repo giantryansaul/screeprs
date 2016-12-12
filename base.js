@@ -26,14 +26,21 @@ module.exports = {
                 common.buildCreep(roleUpgrader, roomName);
             }
         } else if (level == 2) {
-            for (var h; h < upgraders.length; h++) {
-                console.log(upgraders[h]); // FIXME
-                Game.creeps[upgraders[h].name].suicide();
-            }
+
             if (harvesters.length < 3) {
                 common.buildCreep(roleHarvester, roomName);
             } else if (builders.length < 3) {
                 common.buildCreep(roleBuilder, roomName);
+            }
+            if (Game.rooms[roomName].energyCapacityAvailable >= 550) {
+                if (upgraders.length < 4) {
+                    common.buildCreep(roleUpgrader, roomName);
+                }
+            } else {
+                for (var h; h < upgraders.length; h++) {
+                    console.log(upgraders[h]); // FIXME
+                    Game.creeps[upgraders[h].name].suicide();
+                }
             }
         }
     },
@@ -42,23 +49,10 @@ module.exports = {
 
         for(var name in Game.creeps) {
            var creep = Game.creeps[name];
-
-           if (level == 1) {
-               if(creep.memory.role == roleHarvester.name) {
-                   roleHarvester.run(creep);
-               }
-               if(creep.memory.role == roleUpgrader.name) {
-                   roleUpgrader.run(creep);
-               }
-           } else if (level == 2) {
-               if(creep.memory.role == roleBuilder.name) {
-                   roleBuilder.run(creep);
-               }
-               if(creep.memory.role == roleHarvester.name) {
-                   roleHarvester.run(creep);
-               }
-           }
-       }
+           if(creep.memory.role == roleHarvester.name) {roleHarvester.run(creep);}
+           if(creep.memory.role == roleUpgrader.name) {roleUpgrader.run(creep);}
+           if(creep.memory.role == roleBuilder.name) {roleBuilder.run(creep, roomName);}
+        }
     },
 
     buildStructures: function(roomName, level) {

@@ -11,6 +11,7 @@ module.exports = {
         this.buildWorkers(roomName, level);
         this.workerBehavior(roomName, level);
         this.buildStructures(roomName, level);
+        // TODO: Need a total energy store factor, can't build new workers right now.
     },
 
     buildWorkers: function(roomName, level) {
@@ -24,7 +25,7 @@ module.exports = {
             } else if (upgraders.length < 2) {
                 common.buildCreep(roleUpgrader, roomName);
             }
-        } else if (level == 2){
+        } else if (level == 2) {
             for (var h; h < upgraders.length; h++) {
                 console.log(upgraders[h]); // FIXME
                 Game.creeps[upgraders[h].name].suicide();
@@ -72,8 +73,9 @@ module.exports = {
 
         for (var i=0; i < positions.length; i++) {
             Game.rooms[roomName].createConstructionSite(
-                Game.spawns.Spawn1.pos.x + positions[i][0],
-                Game.spawns.Spawn1.pos.y + positions[i][1],
+                var spawn = Game.rooms[roomName].find(FIND_MY_SPAWNS)[0];
+                spawn.pos.x + positions[i][0],
+                spawn.pos.y + positions[i][1],
                 STRUCTURE_EXTENSION
             );
         }

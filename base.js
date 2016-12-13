@@ -32,22 +32,22 @@ module.exports = {
 
         if (level == 1) {
             if (harvesters.length < 3) {
-                common.buildCreep(roleHarvester, roomName);
+                common.buildCreep(roleHarvester, roomName, energyLevel);
             } else if (upgraders.length < 2) {
-                common.buildCreep(roleUpgrader, roomName);
+                common.buildCreep(roleUpgrader, roomName, energyLevel);
             }
         } else if (level == 2) {
 
             if (harvesters.length < 7) {
-                common.buildCreep(roleHarvester, roomName);
+                common.buildCreep(roleHarvester, roomName, energyLevel);
             } else if (builders.length < 3) {
-                common.buildCreep(roleBuilder, roomName);
+                common.buildCreep(roleBuilder, roomName, energyLevel);
             } else if (upgraders.length < 1) {
-                common.buildCreep(roleUpgrader, roomName);
+                common.buildCreep(roleUpgrader, roomName, energyLevel);
             }
             if (Game.rooms[roomName].energyCapacityAvailable >= 550) {
                 if (upgraders.length < 4) {
-                    common.buildCreep(roleUpgrader, roomName);
+                    common.buildCreep(roleUpgrader, roomName, energyLevel);
                 }
             }
         }

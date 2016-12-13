@@ -71,7 +71,7 @@ module.exports = {
             [0, -2],
             [-2, 0],
             [2, 2]
-        ]
+        ];
 
         for (var i=0; i < positions.length; i++) {
             var spawn = Game.rooms[roomName].find(FIND_MY_SPAWNS)[0];
@@ -82,4 +82,4 @@ module.exports = {
             );
         }
     }
-}
+};
